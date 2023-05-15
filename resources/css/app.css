@@ -1,0 +1,17 @@
+/*
+<link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+<link href="../../assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+<link href="../../assets/plugins/pace/pace.css" rel="stylesheet">
+<link href="../../assets/plugins/apexcharts/apexcharts.css" rel="stylesheet">
+
+
+<!-- Theme Styles -->
+<link href="../../assets/css/main.min.css" rel="stylesheet">
+<link href="../../assets/css/custom.css" rel="stylesheet"> */
+@import '../../public/admin/assets/plugins/bootstrap/css/bootstrap.min.css';
+@import '../../public/admin/assets/plugins/font-awesome/css/all.min.css';
+@import '../../public/admin/assets/plugins/pace/pace.css';
+@import '../../public/admin/assets/plugins/apexcharts/apexcharts.css';
+@import '../../public/admin/assets/css/main.min.css';
+@import '../../public/admin/assets/css/custom.css';
