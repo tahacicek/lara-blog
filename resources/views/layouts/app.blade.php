@@ -19,9 +19,12 @@
         <div class="page-content">
             @include('layouts.app.header')
             {{ $slot }}
-            <div class="page-footer">
-                <a href="crypto.html" class="page-footer-item page-footer-item-right"></a>
-            </div>
+            @if (!route('login'))
+                <div class="page-footer">
+                    <a href="crypto.html" class="page-footer-item page-footer-item-right"></a>
+                </div>
+            @endif
+
         </div>
     </div>
 
