@@ -9,6 +9,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @yield('css')
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -24,7 +25,6 @@
                     <a href="crypto.html" class="page-footer-item page-footer-item-right"></a>
                 </div>
             @endif
-
         </div>
     </div>
 
@@ -35,6 +35,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('admin') }}/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    @yield('js')
 </body>
 
 </html>

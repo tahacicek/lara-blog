@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('title', 'Anasayfa')
+    @section('css')
+    @endsection
     <div class="main-wrapper">
         <div class="row">
             <div class="col-lg-6">
@@ -14,8 +17,8 @@
                         <div class="card stats-card">
                             <div class="card-body">
                                 <div class="stats-info">
-                                    <h5 class="card-title">$30K<span
-                                            class="stats-change stats-change-danger">-8%</span></h5>
+                                    <h5 class="card-title">$30K<span class="stats-change stats-change-danger">-8%</span>
+                                    </h5>
                                     <p class="stats-text">Total revenue</p>
                                 </div>
                                 <div class="stats-icon change-danger">
@@ -28,8 +31,8 @@
                         <div class="card stats-card">
                             <div class="card-body">
                                 <div class="stats-info">
-                                    <h5 class="card-title">$21K<span
-                                            class="stats-change stats-change-danger">-8%</span></h5>
+                                    <h5 class="card-title">$21K<span class="stats-change stats-change-danger">-8%</span>
+                                    </h5>
                                     <p class="stats-text">Total revenue</p>
                                 </div>
                                 <div class="stats-icon change-danger">
@@ -163,8 +166,8 @@
                 <div class="card widget widget-info card-bg">
                     <div class="card-body">
                         <div class="widget-info-container">
-                            <div class="widget-info-image"
-                                style="background: url('../../assets/images/premium.svg')"></div>
+                            <div class="widget-info-image" style="background: url('../../assets/images/premium.svg')">
+                            </div>
                             <h5 class="widget-info-title text-white">Advanced Security</h5>
                             <p class="widget-info-text">Lorem ipsum dolor sit amet. Nunc cursus tempor sapien,
                                 et mattis libero dapibus ut. Ut a ante sit amet arcu imperdiet</p>
@@ -182,8 +185,7 @@
                             <div class="tr-item">
                                 <div class="tr-company-name">
                                     <div class="tr-img tr-card-img">
-                                        <img src="../../assets/images/avatars/profile-image.png"
-                                            alt="...">
+                                        <img src="../../assets/images/avatars/profile-image.png" alt="...">
                                     </div>
                                     <div class="tr-text">
                                         <h4 class="text-white">John Doe</h4>
@@ -199,8 +201,7 @@
                             <div class="tr-item">
                                 <div class="tr-company-name">
                                     <div class="tr-img tr-card-img">
-                                        <img src="../../assets/images/avatars/profile-image.png"
-                                            alt="...">
+                                        <img src="../../assets/images/avatars/profile-image.png" alt="...">
                                     </div>
                                     <div class="tr-text">
                                         <h4 class="text-white">Ann Doe</h4>
@@ -216,8 +217,7 @@
                             <div class="tr-item">
                                 <div class="tr-company-name">
                                     <div class="tr-img tr-card-img">
-                                        <img src="../../assets/images/avatars/profile-image.png"
-                                            alt="...">
+                                        <img src="../../assets/images/avatars/profile-image.png" alt="...">
                                     </div>
                                     <div class="tr-text">
                                         <h4 class="text-white">Lisa Doe</h4>
@@ -233,8 +233,7 @@
                             <div class="tr-item">
                                 <div class="tr-company-name">
                                     <div class="tr-img tr-card-img">
-                                        <img src="../../assets/images/avatars/profile-image.png"
-                                            alt="...">
+                                        <img src="../../assets/images/avatars/profile-image.png" alt="...">
                                     </div>
                                     <div class="tr-text">
                                         <h4 class="text-white">John Doe</h4>
@@ -250,8 +249,7 @@
                             <div class="tr-item">
                                 <div class="tr-company-name">
                                     <div class="tr-img tr-card-img">
-                                        <img src="../../assets/images/avatars/profile-image.png"
-                                            alt="...">
+                                        <img src="../../assets/images/avatars/profile-image.png" alt="...">
                                     </div>
                                     <div class="tr-text">
                                         <h4 class="text-white">Ann Doe</h4>
@@ -295,6 +293,7 @@
                 </div>
             </div>
         </div>
-
     </div>
+    @section('js')
+    @endsection
 </x-app-layout>
