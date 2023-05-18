@@ -16,7 +16,29 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    asdasd
+                    <table class="table table-bordered table-striped" id="categoryTable">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Kategori Adı</th>
+                                <th>Slug</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders">
+                            @foreach ($categories as $category)
+                                <tr id="{{ $category->id }}" class="text-center">
+                                    <td> <i class="fa handle fa-sort" style="cursor: move" aria-hidden="true"></i></td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary btn-sm">Düzenle</a>
+                                        <a href="" class="btn btn-danger btn-sm">Sil</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -36,6 +58,10 @@
         </div>
     </div>
     @section('js')
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
                 $('#createCategories').on('click', function() {
@@ -69,13 +95,14 @@
                     processData: false,
                     success: function(data) {
 
-                            iziToast.success({
-                                title: 'Başarılı',
-                                message: data.message,
-                                position: 'topRight'
-                            });
-                            $('#createCategory').modal('hide');
-                    },error: function(data) {
+                        iziToast.success({
+                            title: 'Başarılı',
+                            message: data.message,
+                            position: 'topRight'
+                        });
+                        $('#createCategory').modal('hide');
+                    },
+                    error: function(data) {
                         if (data.status == 422) {
                             $.each(data.responseJSON.errors, function(key, value) {
                                 iziToast.error({
@@ -87,6 +114,33 @@
                         }
                     }
                 });
+            });
+
+
+            //handle siralama sortable
+            var el = document.getElementById('orders');
+            $("#orders").sortable({
+                handle: ".handle",
+                update: function() {
+                    var siralama = $("#orders").sortable("serialize");
+                    var type = 'category-sort'
+                    $.ajax({
+                        url: '/category/func',
+                        method: "POST",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            type: type,
+                            siralama: siralama
+                        },
+                        success: function(data) {
+                            iziToast.success({
+                                title: 'Başarılı',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                        }
+                    });
+                }
             });
         </script>
     @endsection

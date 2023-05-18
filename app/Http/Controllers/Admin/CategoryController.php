@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Cateogry::all();
+        return view('admin.category.index', compact('categories'));
     }
 
     public function operations(Request $request)
@@ -47,9 +48,18 @@ class CategoryController extends Controller
                 $category->save();
                 return response()->json(['success' => true, 'message' => 'Kategori başarıyla eklendi.'], 200);
                 break;
+                case 'category-sort';
+                //category sıralaması güncelleme
+                if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
+                dd($request->all());
+                return response()->json(['success' => true, 'message' => 'Kategori sıralaması başarıyla güncellendi.'], 200);
+
+
+                break;
             default:
                 return response()->json(['error' => 'Gecersiz istek.'], 400);
                 break;
         }
     }
 }
+
