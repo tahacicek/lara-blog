@@ -31,10 +31,7 @@
                 <div class="modal-body">
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -54,6 +51,41 @@
                             $('#createCategory').modal('show');
                         }
                     });
+                });
+                //insert-category
+
+            });
+
+
+            //categoryForm submit
+            $(document).on('submit', '#categoryForm', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/category/func',
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+
+                            iziToast.success({
+                                title: 'Başarılı',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $('#createCategory').modal('hide');
+                    },error: function(data) {
+                        if (data.status == 422) {
+                            $.each(data.responseJSON.errors, function(key, value) {
+                                iziToast.error({
+                                    title: 'Hata',
+                                    message: value,
+                                    position: 'topRight'
+                                });
+                            });
+                        }
+                    }
                 });
             });
         </script>
