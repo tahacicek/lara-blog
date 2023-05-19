@@ -56,7 +56,6 @@
                 <div class="modal-body">
 
                 </div>
-
             </div>
         </div>
     </div>
@@ -351,7 +350,6 @@
                     ]
                 });
             });
-
             //trashCategory with izitoast questions
             $(document).on('click', '.trashCategory', function() {
                 var id = $(this).data('id');
@@ -396,7 +394,6 @@
                     ]
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>
