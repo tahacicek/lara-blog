@@ -6,7 +6,6 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-import '../../public/admin/assets/plugins/jquery/jquery-3.4.1.min.js';
 import '../../public/admin/assets/plugins/bootstrap/js/bootstrap.min.js';
 import '../../public/admin/assets/plugins/pace/pace.min.js';
 import '../../public/admin/assets/plugins/apexcharts/apexcharts.min.js';

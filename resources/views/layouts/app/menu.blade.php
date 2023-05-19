@@ -6,7 +6,7 @@
                 <a href="#" class="active"><i data-feather="activity"></i>Dashboard<i
                         class="fas fa-chevron-right dropdown-icon"></i></a>
                 <ul class="">
-                    <li><a href="index.html" class="active"><i class="far fa-circle"></i>eCommerce</a></li>
+                    <li><a href="index.html"><i class="far fa-circle"></i>eCommerce</a></li>
                     <li><a href="crypto.html"><i class="far fa-circle"></i>Crypto</a></li>
                 </ul>
             </li>
@@ -76,10 +76,10 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><i data-feather="grid"></i>Tables<i
+                <a href="#"><i data-feather="grid"></i>Kategori<i
                         class="fas fa-chevron-right dropdown-icon"></i></a>
                 <ul class="">
-                    <li><a href="tables.html"><i class="far fa-circle"></i>Basic Tables</a></li>
+                    <li><a href="{{ route('category') }}"  class="active"><i class="far fa-circle"></i>Kategoriler</a></li>
                     <li><a href="data-tables.html"><i class="far fa-circle"></i>Data Tables</a></li>
                 </ul>
             </li>
