@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('slug');
             $table->text('content');
@@ -25,7 +24,6 @@ return new class extends Migration
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->softDeletes();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

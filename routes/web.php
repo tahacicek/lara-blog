@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Customer\HomepageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,9 @@ Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::post('/category/func', [CategoryController::class, 'operations'])->name('category.operations');
     Route::get('/category/order', [CategoryController::class, 'order'])->name('category.order');
+    Route::get('/post',  [PostController::class, 'index'])->name('post');
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+    Route::post('/post/insert',  [PostController::class, 'insert'])->name('post.insert');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
