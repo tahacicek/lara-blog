@@ -80,7 +80,7 @@
                         class="fas fa-chevron-right dropdown-icon"></i></a>
                 <ul class="">
                     <li><a href="{{ route('category') }}"  class="active"><i class="far fa-circle"></i>Kategoriler</a></li>
-                    <li><a href="data-tables.html"><i class="far fa-circle"></i>Data Tables</a></li>
+                    <li><a href="{{ route('post') }}"><i class="far fa-circle"></i>Post</a></li>
                 </ul>
             </li>
             <li>

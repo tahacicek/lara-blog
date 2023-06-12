@@ -27,12 +27,18 @@ Route::get('/',[HomepageController::class,'index'])->name('homepage');
 
 Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //category
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::post('/category/func', [CategoryController::class, 'operations'])->name('category.operations');
     Route::get('/category/order', [CategoryController::class, 'order'])->name('category.order');
-    Route::get('/post',  [PostController::class, 'index'])->name('post');
+    //post
+    Route::get('/posts',  [PostController::class, 'index'])->name('post');
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/insert',  [PostController::class, 'insert'])->name('post.insert');
+    Route::get('/post/edit/{id}',  [PostController::class, 'edit'])->name('post.edit');
+    Route::post('/post/update/{id}',  [PostController::class, 'update'])->name('post.update');
+    Route::post('/post/func',  [PostController::class, 'operations'])->name('post.operations');
+    //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

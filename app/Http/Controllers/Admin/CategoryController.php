@@ -87,7 +87,7 @@ class CategoryController extends Controller
                 $id = $request->id;
                 $category = Category::find($id);
                 $category->delete();
-                return response()->json(['success' => true, 'message' => 'Kategori başarıyla silindi.'], 200);
+                return response()->json(['success' => true, 'message' => 'Kategori başarıyla geri dönüşüm kutusuna yollandı.'], 200);
                 break;
             case 'recycle-category':
                 if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);

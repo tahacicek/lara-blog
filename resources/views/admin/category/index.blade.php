@@ -251,9 +251,6 @@
                         $('#recycleButton').attr('id', 'recycleButton2');
                         $('#recycleButton2').html('<i class="fas fa-arrow-left me-1"></i> Geri Dön');
                         $('#recycleButton2').attr('class', 'btn btn-primary');
-                        //recycleButton2 tıklandığında bir adım geri dönsün
-
-
                         $('#category_table').load('/category/table');
                         $('#categoryTable').DataTable().destroy();
                         $('#categoryTable').html(data.data);

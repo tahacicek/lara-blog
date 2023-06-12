@@ -34,12 +34,12 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('post.insert') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Post Başlığı</label>
                         <input type="text" class="form-control" id="title" name="title"
-                            value="{{ old('title') }}">
+                            value="{{ old('title') ?? $post->title }}">
                         @error('title')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
@@ -47,7 +47,7 @@
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Post İçeriği</label>
-                        <textarea name="content" id="editor">{{ old('content') }}</textarea>
+                        <textarea name="content" id="editor">{{ old('content') ?? $post->content }}</textarea>
                         @error('content')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
@@ -57,7 +57,8 @@
                         <label for="category" class="form-label">Kategori</label>
                         <select name="category[]" class="form-control" id='category' multiple="multiple">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" @if (in_array($category->id, $categoryPost->pluck('category_id')->toArray())) selected @endif>
+                                    {{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category')
@@ -66,20 +67,35 @@
                     </div>
                     <div class="mb-3">
                         <label for="tags" class="form-label">Etiket</label>
-                        <select name="tags[]" class="form-control" id='tags' multiple="multiple"></select>
+                        <select name="tags[]" class="form-control" id='tags' multiple="multiple">
+                            @foreach ($post_tags as $tag)
+                                <option value="{{ $tag }}" selected>{{ $tag }}</option>
+                            @endforeach
+                        </select>
 
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Post Kapak Görseli</label>
                         <input name="image" value="{{ old('image') }}" class="form-control" type="file"
                             id="image">
+                        {{-- input check --}}
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="imageVisible" id="imageVisible">
+                            <label class="form-check-label" for="imageVisible">
+                                Görseli Göster
+                            </label>
+                        </div>
+                        <div class="mt-2" id="imageEdit" style="display: none;">
+                            <img class="mx-auto d-block" src="{{ asset($post->image) }}" width="150">
+                        </div>
                         @error('image')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
+
                     </div>
                     <div class="mb-3">
                         <label for="meta_title" class="form-label">Meta Başlığı</label>
-                        <input type="text" value="{{ old('meta_title') }}" class="form-control" id="meta_title"
+                        <input type="text" value="{{ old('meta_title') ?? $post->meta_title }}" class="form-control" id="meta_title"
                             name="meta_title">
                         @error('meta_title')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -87,7 +103,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="meta_description" class="form-label">Meta Açıklaması</label>
-                        <input type="text" value="{{ old('meta_description') }}" class="form-control"
+                        <input type="text" value="{{ old('meta_description') ?? $post->meta_description }}" class="form-control"
                             id="meta_description" name="meta_description">
                         @error('meta_description')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -95,21 +111,23 @@
                     </div>
                     <div class="mb-3">
                         <label for="meta_keywords" class="form-label">Meta Anahtar Kelimeler</label>
-                        <input type="text" value="{{ old('meta_keywords') }}" class="form-control"
+                        <input type="text" value="{{ old('meta_keywords') ?? $post->meta_keywords }}" class="form-control"
                             id="meta_keywords" name="meta_keywords">
                         @error('meta_keywords')
                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" name="is_published" id="is_published">
+                        <input class="form-check-input" type="checkbox" name="is_published" id="is_published" @if ($post->is_published == "on")
+                            checked
+                        @endif>
                         <label class="form-check-label" for="is_published">
                             Şimdi Yayınlansın
                         </label>
                     </div>
-                    <div class="mb-3" id="publishDate">
+                    <div class="mb-3" id="publishDate" @if ($post->is_published == "0") style="display: none" @endif>
                         <label for="exampleInputEmail1" class="form-label">Yayın Tarihi</label>
-                        <input class="form-control col-md-2" type="date" name="published_at"
+                        <input class="form-control col-md-2" type="date" name="published_at" value="{{ old('published_at') ?? $post->published_at }}"
                             placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31">
                     </div>
                     <div class="mb-3 float-end">
@@ -148,6 +166,15 @@
                     $("#publishDate").hide(200);
                 } else {
                     $("#publishDate").show(200);
+                }
+            });
+            $("#imageVisible").click(function() {
+                if ($(this).is(":checked")) {
+                    $("#imageEdit").show(200);
+
+                } else {
+                    $("#imageEdit").hide(200);
+
                 }
             });
         </script>
