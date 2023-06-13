@@ -11,17 +11,17 @@
         </thead>
         <tbody>
             @foreach ($posts as $post)
-                <tr>
+                <tr id="post_{{ $post->id }}" class="text-center">
                     <td>{{ $post->title }}</td>
                     <td><img src="{{ asset($post->image) }}" width="170px" alt="{{ $post->title }}"></td>
                     <td>
                         @foreach ($postCat as $cat)
                             @if ($post->id == $cat->post_id)
-                                {{ $cat->category->name }}
+                                <span class="badge bg-primary"> {{ $cat->category->name }}</span>
                             @endif
                         @endforeach
                     </td>
-                    <td>{{ $post->deleted_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($post->deleted_at)->diffForHumans() }}</td>
                     <td>
                         <button data-id="{{ $post->id }}" class="btn btn-primary btn-sm coverPost">Kurtar</button>
                         <button data-id="{{ $post->id }}" class="btn btn-danger btn-sm trashPost">Sil</button>

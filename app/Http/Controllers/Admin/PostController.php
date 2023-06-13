@@ -128,18 +128,40 @@ class PostController extends Controller
             case 'delete-post':
                 if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
                 $post = Post::find($request->id);
-                $postCat = PostCategory::where('post_id', $request->id)->first();
-                $postCat->delete();
+                $postCat = PostCategory::where('post_id', $request->id)->get();
+                foreach ($postCat as $cat) {
+                    $cat->delete();
+                }
                 $post->delete();
                 return response()->json(['success' => true, 'message' => 'Post başarıyla silindi.'], 200);
                 break;
             case 'recycle-post':
                 if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
-                //post deleted_at with categories
                 $posts = Post::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
-                //postcategory with category get
                 $postCat = PostCategory::with('category')->onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
                 return response()->json(['success' => true, 'data' => view('admin.post.includes.recycle', ['posts' => $posts, 'postCat' => $postCat])->render()], 200);
+                break;
+            case 'cover-post':
+                if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
+                $id = $request->id;
+                $post = Post::onlyTrashed()->find($id);
+                $postCat = PostCategory::with('category')->onlyTrashed()->where('post_id', $id)->get();
+                foreach ($postCat as $cat) {
+                    $cat->restore();
+                }
+                $post->restore();
+                return response()->json(['success' => true, 'message' => 'Yazı başarıyla kurtarıldı.'], 200);
+                break;
+            case 'trash-post':
+                if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
+                $id = $request->id;
+                $post = Post::onlyTrashed()->find($id);
+                $postCat = PostCategory::with('category')->onlyTrashed()->where('post_id', $id)->get();
+                foreach ($postCat as $cat) {
+                    $cat->forceDelete();
+                }
+                $post->forceDelete();
+                return response()->json(['success' => true, 'message' => 'Yazı başarıyla silindi.'], 200);
                 break;
             default:
                 return response()->json(['error' => 'Gecersiz istek.'], 400);

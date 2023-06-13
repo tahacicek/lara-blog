@@ -10,8 +10,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-end">
-                        <a class="btn btn-success me-2"
-                            href="{{ route('post.create') }}"> Oluştur <i class="fa fa-check" aria-hidden="true"></i></a>
+                        <a class="btn btn-success me-2" href="{{ route('post.create') }}"> Oluştur <i
+                                class="fa fa-check" aria-hidden="true"></i></a>
                         <button class="btn btn-warning text-dark" id="recycleButton"> Geri Dönüşüm <i
                                 class="fa fa-trash" aria-hidden="true"></i> </button>
                     </div>
@@ -31,7 +31,7 @@
                             @foreach ($posts as $post)
                                 <tr class="text-center">
                                     <td> {{ $post->id }} </td>
-                                    <td>  <img src="{{ asset($post->image) }}" alt="" width="150px"> </td>
+                                    <td> <img src="{{ asset($post->image) }}" alt="" width="150px"> </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->is_published }}</td>
                                     <td>
@@ -54,55 +54,55 @@
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
             integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 
-    <script>
-        //if click delete post with izitoast questions ajax
-        $('.deletePost').on('click', function() {
-            let id = $(this).data('id');
-            let title = $(this).data('title');
-            iziToast.question({
-                timeout: 20000,
-                close: false,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
-                title: 'Hey',
-                message: 'Are you sure want to delete ' + title + ' post?',
-                position: 'center',
-                buttons: [
-                    ['<button><b>YES</b></button>', function(instance, toast) {
-                        $.ajax({
-                            type: "POST",
-                            url: "/post/func/",
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                                id: id,
-                                type: 'delete-post'
-                            },
-                            success: function(response) {
-                                if (response.status == 200) {
-                                    iziToast.success({
-                                        title: 'OK',
-                                        message: "Yazı başarıyla geri dönüşüm kutusuna atıldı.",
-                                        position: 'topRight'
-                                    });
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 1000);
+        <script>
+            //if click delete post with izitoast questions ajax
+            $('.deletePost').on('click', function() {
+                let id = $(this).data('id');
+                let title = $(this).data('title');
+                iziToast.question({
+                    timeout: 20000,
+                    close: false,
+                    overlay: true,
+                    displayMode: 'once',
+                    id: 'question',
+                    zindex: 999,
+                    title: 'Hey',
+                    message: 'Are you sure want to delete ' + title + ' post?',
+                    position: 'center',
+                    buttons: [
+                        ['<button><b>YES</b></button>', function(instance, toast) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/post/func/",
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id: id,
+                                    type: 'delete-post'
+                                },
+                                success: function(response) {
+                                    if (response.status == 200) {
+                                        iziToast.success({
+                                            title: 'OK',
+                                            message: "Yazı başarıyla geri dönüşüm kutusuna atıldı.",
+                                            position: 'topRight'
+                                        });
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 1000);
+                                    }
                                 }
-                            }
-                        });
-                    }, true],
-                    ['<button>NO</button>', function(instance, toast) {
-                        instance.hide({
-                            transitionOut: 'fadeOutUp'
-                        }, toast, 'button');
-                    }],
-                ]
+                            });
+                        }, true],
+                        ['<button>NO</button>', function(instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp'
+                            }, toast, 'button');
+                        }],
+                    ]
+                });
             });
-        });
 
-        $(document).on('click', '#recycleButton', function() {
+            $(document).on('click', '#recycleButton', function() {
                 $.ajax({
                     url: '/post/func',
                     method: "POST",
@@ -162,7 +162,99 @@
                 });
             });
 
-    </script>
+            $(document).on('click', '#recycleButton2', function() {
+                location.reload();
+            });
+
+             //coverCategory tıklandığında kategori kurtarılsın izitoas soruyla
+             $(document).on('click', '.coverPost', function() {
+                var id = $(this).data('id');
+                iziToast.question({
+                    timeout: 20000,
+                    close: false,
+                    overlay: true,
+                    displayMode: 'once',
+                    id: 'question',
+                    zindex: 999,
+                    title: 'Hey',
+                    message: 'Yazıyı kurtarmak istediğinize emin misiniz?',
+                    position: 'center',
+                    buttons: [
+                        ['<button><b>KURTAR</b></button>', function(instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp'
+                            }, toast, 'button');
+                            $.ajax({
+                                url: '/post/func',
+                                method: "POST",
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    type: 'cover-post',
+                                    id: id
+                                },
+                                success: function(data) {
+                                    iziToast.success({
+                                        title: 'Başarılı',
+                                        message: data.message,
+                                        position: 'topRight'
+                                    });
+                                    $('#post_' + id).remove();
+                                }
+                            });
+                        }, true],
+                        ['<button>İPTAL</button>', function(instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp'
+                            }, toast, 'button');
+                        }],
+                    ]
+                });
+            });
+            //trashCategory with izitoast questions
+            $(document).on('click', '.trashPost', function() {
+                var id = $(this).data('id');
+                iziToast.question({
+                    timeout: 20000,
+                    close: false,
+                    overlay: true,
+                    displayMode: 'once',
+                    id: 'question',
+                    zindex: 999,
+                    title: 'Hey',
+                    message: 'Yazıyı kalıcı olarak silmek istediğinize emin misiniz?',
+                    position: 'center',
+                    buttons: [
+                        ['<button><b>AT</b></button>', function(instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp'
+                            }, toast, 'button');
+                            $.ajax({
+                                url: '/post/func',
+                                method: "POST",
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    type: 'trash-post',
+                                    id: id
+                                },
+                                success: function(data) {
+                                    iziToast.success({
+                                        title: 'Başarılı',
+                                        message: data.message,
+                                        position: 'topRight'
+                                    });
+                                    $('#post_' + id).remove();
+                                }
+                            });
+                        }, true],
+                        ['<button>İPTAL</button>', function(instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp'
+                            }, toast, 'button');
+                        }],
+                    ]
+                });
+            });
+        </script>
     @endsection
 
 </x-app-layout>
