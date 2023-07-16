@@ -168,4 +168,29 @@ class PostController extends Controller
                 break;
         }
     }
+
+    //demo 15 post
+    public function demo()
+    {
+        //if this route works, create 15 fake posts
+        for ($i = 0; $i < 15; $i++) {
+            $post = new Post();
+            $post->title = 'Demo Post ' . $i;
+            $post->slug = Str::slug('Demo Post ' . $i);
+            $post->content = 'Lorem ipsum dolor sit amet consectetur adipisicing e';
+            $post->image = 'post/demo.jpg';
+            $post->published_at = now();
+            $post->meta_title = 'Demo Post ' . $i;
+            $post->meta_description = 'Demo Post ' . $i;
+            $post->meta_keywords = 'Demo Post ' . $i;
+            $post->tags = 'Demo Post ' . $i;
+            $post->save();
+            sleep(3);
+
+            $category = new PostCategory();
+            $category->post_id = $post->id;
+            $category->category_id = 1;
+            $category->save();
+        }
+    }
 }

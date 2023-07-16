@@ -5,7 +5,11 @@
     @endsection
     <div class="main-wrapper">
         <div class="main-wrapper">
-            <h3 class="text-white">Kategoriler</h3>
+            <h3 class="text-white">Kategoriler
+            </h3>
+            <p class="text-danger">
+                5. sıradan itibiren gizlenecektir.
+            </p>
             <div class="py-3"></div>
             <div class="card">
                 <div class="card-header">
@@ -29,7 +33,8 @@
                         <tbody id="orders">
                             @foreach ($categories as $category)
                                 <tr id="category_{{ $category->id }}" class="text-center">
-                                    <td> <i class="fa handle fa-sort" style="cursor: move" aria-hidden="true"></i></td>
+                                    <td> <i class="fa handle fa-sort" style="cursor: move" aria-hidden="true"></i>
+                                    </td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
@@ -130,7 +135,6 @@
                     "responsive": true,
                     "autoWidth": false,
                     "lengthChange": false,
-                    "pageLength": 5,
                     //theme
                     "dom": '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"i><"col-md-6"p>>',
                     "buttons": [{

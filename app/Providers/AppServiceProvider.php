@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //kategory share
+        view()->composer('*', function ($view) {
+            $categories = \App\Models\Category::where('status', 'active')->orderBy('order', 'ASC')->get();
+            $view->with('categories', $categories);
+        });
     }
 }

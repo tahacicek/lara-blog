@@ -11,4 +11,10 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    //PostCategory model
+    public function categories()
+    {
+
+    }
 }

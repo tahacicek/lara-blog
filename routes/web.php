@@ -38,6 +38,9 @@ Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
     Route::get('/post/edit/{id}',  [PostController::class, 'edit'])->name('post.edit');
     Route::post('/post/update/{id}',  [PostController::class, 'update'])->name('post.update');
     Route::post('/post/func',  [PostController::class, 'operations'])->name('post.operations');
+    Route::get('/post/fake',  [PostController::class, 'demo'])->name('post.demo');
+    //demo
+
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
