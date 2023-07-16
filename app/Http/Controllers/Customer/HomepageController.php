@@ -28,6 +28,6 @@ class HomepageController extends Controller
 
     public function postDetail($slug){
         $post = Post::where('slug', $slug)->first() ?? abort(403 ,"Böyle bir yazı bulunamadı.");
-        return view('customer.post-detail', compact('post'));
+        return view('customer.includes.post-detail', compact('post'));
     }
 }

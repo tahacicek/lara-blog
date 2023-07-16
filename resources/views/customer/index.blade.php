@@ -36,7 +36,7 @@
                 <div class="col-md-4">
                     {{-- buraya 4. ve 5. postlar  --}}
                     @foreach ($posts->sortByDesc('created_at')->skip(3)->take(2) as $post)
-                        <a href="" class="h-entry mb-30 v-height gradient"
+                        <a href="{{ route('post.detail', $post->slug) }}" class="h-entry mb-30 v-height gradient"
                             style="background-image: url('{{ $post->image }}');">
 
                             <div class="text">
@@ -70,10 +70,10 @@
                     @foreach ($value as $post)
                         <div class="col-lg-4 mb-4">
                             <div class="post-entry-alt">
-                                <a href="single.html" class="img-link"><img src="{{ asset($post->post->image) }}"
+                                <a href="" class="img-link"><img src="{{ asset($post->post->image) }}"
                                         alt="Image" class="img-fluid"></a>
                                 <div class="excerpt">
-                                    <h2><a href="single.html">{{ $post->post->title }}</a>
+                                    <h2><a href="{{ route('post.detail', $post->post->slug) }}">{{ $post->post->title }}</a>
                                     </h2>
                                     <div class="post-meta align-items-center text-left clearfix">
                                         <figure class="author-figure mb-0 me-3 float-start"><img
