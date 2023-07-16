@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
-            $table->int('hit')->default(0);
+            $table->integer('hit')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

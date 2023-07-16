@@ -172,6 +172,32 @@ class PostController extends Controller
     //demo 15 post
     public function demo()
     {
+        $categoryName = [
+            'Genel',
+            'Teknoloji',
+            'Spor',
+            'Eğitim',
+            'Sağlık',
+            'Ekonomi',
+            'Bilim',
+            'Sanat',
+            'Sinema',
+            'Tarih',
+            'Siyaset',
+            'Oyun',
+            'Kitap'
+        ];
+        $category = new Cateogry();
+        $category->name = $categoryName[rand(0, 12)];
+        $category->slug = Str::slug($categoryName[rand(0, 12)]);
+        $category->description = "deneme açıklama.";
+        $category->status = "active";
+        $category->meta_title = "meta title";
+        $category->meta_description = "meta description";
+        $category->meta_keywords = "meta keywords";
+        $category->order = rand(0,12);
+        $category->save();
+
         //if this route works, create 15 fake posts
         for ($i = 0; $i < 15; $i++) {
             $post = new Post();
@@ -186,11 +212,10 @@ class PostController extends Controller
             $post->tags = 'Demo Post ' . $i;
             $post->save();
             sleep(3);
-
-            $category = new PostCategory();
-            $category->post_id = $post->id;
-            $category->category_id = 1;
-            $category->save();
+            $categoryPost = new PostCategory();
+            $categoryPost->post_id = $post->id;
+            $categoryPost->category_id = 1;
+            $categoryPost->save();
         }
     }
 }
