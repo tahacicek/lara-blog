@@ -25,4 +25,9 @@ class HomepageController extends Controller
 
         return view('customer.index', compact('posts', 'catPost', 'categories'));
     }
+
+    public function postDetail($slug){
+        $post = Post::where('slug', $slug)->first() ?? abort(403 ,"Böyle bir yazı bulunamadı.");
+        return view('customer.post-detail', compact('post'));
+    }
 }

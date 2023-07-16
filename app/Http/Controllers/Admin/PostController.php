@@ -172,6 +172,8 @@ class PostController extends Controller
     //demo 15 post
     public function demo()
     {
+        for ($i = 0; $i < 13; $i++) {
+
         $categoryName = [
             'Genel',
             'Teknoloji',
@@ -187,7 +189,7 @@ class PostController extends Controller
             'Oyun',
             'Kitap'
         ];
-        $category = new Cateogry();
+        $category = new Category();
         $category->name = $categoryName[rand(0, 12)];
         $category->slug = Str::slug($categoryName[rand(0, 12)]);
         $category->description = "deneme açıklama.";
@@ -197,6 +199,7 @@ class PostController extends Controller
         $category->meta_keywords = "meta keywords";
         $category->order = rand(0,12);
         $category->save();
+    }
 
         //if this route works, create 15 fake posts
         for ($i = 0; $i < 15; $i++) {

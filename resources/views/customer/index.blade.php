@@ -21,9 +21,8 @@
                 <div class="col-md-4">
                     {{-- buraya 3. post --}}
                     @foreach ($posts->sortByDesc('created_at')->skip(2)->take(1) as $post)
-                        <a href="" class="h-entry img-5 h-100 gradient"
+                        <a href="{{ route('post.detail', $post->slug) }}" class="h-entry img-5 h-100 gradient"
                             style="background-image: url('{{ $post->image }}');">
-
                             <div class="text">
                                 <div class="post-categories mb-3">
                                     <span class="post-category bg-danger"></span>

@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 
 Route::get('/',[HomepageController::class,'index'])->name('homepage');
+Route::get('/post/{slug}',[HomepageController::class,'postDetail'])->name('post.detail');
 
 Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
