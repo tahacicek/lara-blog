@@ -12,9 +12,10 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
-    //PostCategory model
-    public function categories()
+    //category->id PostCategory->category_id
+    public function postCategory()
     {
-
+        return $this->hasMany(PostCategory::class, 'category_id');
     }
+
 }
