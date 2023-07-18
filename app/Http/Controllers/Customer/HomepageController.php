@@ -26,19 +26,27 @@ class HomepageController extends Controller
         return view('customer.index', compact('posts', 'catPost', 'categories'));
     }
 
-    public function postDetail($slug){
-        $post = Post::where('slug', $slug)->with('postCategory')->first() ?? abort(403 ,"Böyle bir yazı bulunamadı.");
+    public function postDetail($slug)
+    {
+        $post = Post::where('slug', $slug)->with('postCategory')->first() ?? abort(403, "Böyle bir yazı bulunamadı.");
         $categories = Category::with('postCategory')->get();
         $postTagCat = [];
-        //post'taki tag'leri virgülle ayırıp ve kategorilerini de alıp array'e atıyoruz
-        foreach ($post->postCategory as $postCategory) {
-            $postTagCat[] = explode(',', $postCategory->post->tags);
-            foreach ($categories as $category) {
-                if ($postCategory->category_id == $category->id) {
-                    $postTagCat[] = $category->name;
+        //kategorilerin isimlerini alıp postta aynı olanları arraye atıyoruz
+        foreach ($categories as $category) {
+            foreach ($post->postCategory as $postCategory) {
+                if ($category->id == $postCategory->category_id) {
+                    $postTagCat['category'][] = $category->name;
                 }
             }
         }
-        return view('customer.includes.post-detail', compact('post'));
+
+
+       $postTagCat['tags'] = explode(',', $post->tags);
+
+       //örnek foreach html
+
+
+
+        return view('customer.includes.post-detail', compact('post', 'postTagCat'));
     }
 }
