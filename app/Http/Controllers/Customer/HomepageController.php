@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -39,14 +40,36 @@ class HomepageController extends Controller
                 }
             }
         }
+        $postTagCat['tags'] = explode(',', $post->tags);
+        $user = User::where('role', 'admin')->first();
+
+        // All categories and tags
+        $posts = Post::with('postCategory')->get();
+        $catPost = PostCategory::all();
+        $categorysPost = [];
+        //tüm kategorileri ve etiketleri alıyoruz
+        foreach ($categories as $category) {
+            foreach ($posts as $post) {
+                foreach ($post->postCategory as $postCategories) {
+                    if ($category->id == $postCategories->category_id) {
+                        $categorysPost['category'][] = $category->name;
+                    }
+                }
+            }
+        }
+
+        foreach ($posts as $post) {
+            $categorysPost['tags'][] = explode(',', $post->tags);
+        }
+        $catPost = $categorysPost;
+        // aynı kategorilerin sayılarını bulup arraye atıyoruz
+        $catPost['category'] = array_count_values($catPost['category']);
+
+        // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
+        $catPost['category'] = array_unique($catPost['category']);
+        //
 
 
-       $postTagCat['tags'] = explode(',', $post->tags);
-
-       //örnek foreach html
-
-
-
-        return view('customer.includes.post-detail', compact('post', 'postTagCat'));
+        return view('customer.includes.post-detail', compact('post', 'postTagCat', 'user', 'catPost'));
     }
 }

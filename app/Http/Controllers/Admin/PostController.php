@@ -173,7 +173,6 @@ class PostController extends Controller
     public function demo()
     {
         for ($i = 0; $i < 13; $i++) {
-
         $categoryName = [
             'Genel',
             'Teknoloji',

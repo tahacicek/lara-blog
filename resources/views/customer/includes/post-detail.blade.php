@@ -4,16 +4,16 @@
     @endsection
 
     <div class="site-cover site-cover-sm same-height overlay single-page"
-        style="background-image: url('images/hero_5.jpg');">
+        style="background-image: url('{{ asset($post->image) }}');">
         <div class="container">
             <div class="row same-height justify-content-center">
                 <div class="col-md-6">
                     <div class="post-entry text-center">
                         <h1 class="mb-4">{{ $post->title }}</h1>
                         <div class="post-meta align-items-center text-center">
-                            <figure class="author-figure mb-0 me-3 d-inline-block"><img src="images/person_1.jpg"
+                            <figure class="author-figure mb-0 me-3 d-inline-block"><img src="{{ asset($user->avatar) }}"
                                     alt="Image" class="img-fluid"></figure>
-                            <span class="d-inline-block mt-1">@defaten</span>
+                            <span class="d-inline-block mt-1">{{ '@' . $user->username }}</span>
                             <span>&nbsp;-&nbsp;
                                 {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                             </span>
@@ -23,14 +23,10 @@
             </div>
         </div>
     </div>
-
     <section class="section">
         <div class="container">
-
             <div class="row blog-entries element-animate">
-
                 <div class="col-md-12 col-lg-8 main-content">
-
                     <div class="post-content-body">
                         {{-- <div class="row my-4">
                   <div class="col-md-12 mb-4">
@@ -47,22 +43,17 @@
                             {!! $post->content !!}
                         </p>
                     </div>
-
-
                     <div class="pt-5">
                         <p>Kategori :
-
-                          @foreach ($postTagCat['category'] as $cat)
-                          <a href="#" class="">{{$cat}}</a>
-                          @endforeach
-                          Etiket :
-                          @foreach($postTagCat['tags'] as $tag)
-                          <a href="#" class="">#{{$tag}}</a>
-                       @endforeach
+                            @foreach ($postTagCat['category'] as $cat)
+                                <a href="#" class="">{{ $cat }}</a>
+                            @endforeach
+                            Etiket :
+                            @foreach ($postTagCat['tags'] as $tag)
+                                <a href="#" class="">#{{ $tag }}</a>
+                            @endforeach
                         </p>
                     </div>
-
-
                     <div class="pt-5 comment-wrap">
                         <h3 class="mb-5 heading">6 Comments</h3>
                         <ul class="comment-list">
@@ -190,11 +181,8 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
-
                 <!-- END main-content -->
-
                 <div class="col-md-12 col-lg-4 sidebar">
                     <div class="sidebar-box search-form-wrap">
                         <form action="#" class="sidebar-search-form">
@@ -206,13 +194,12 @@
                     <!-- END sidebar-box -->
                     <div class="sidebar-box">
                         <div class="bio text-center">
-                            <img src="images/person_2.jpg" alt="Image Placeholder" class="img-fluid mb-3">
+                            <img src="{{ asset($user->avatar) }}" alt="Image Placeholder" class="img-fluid mb-3">
                             <div class="bio-body">
-                                <h2>Hannah Anderson</h2>
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate
-                                    nulla quo veniam fuga sit molestias minus.</p>
-                                <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a>
+                                <h2>{{ $user->name }}</h2>
+                                <p class="mb-4">{{ Str::limit($user->bio, 50) }}</p>
+                                <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Bio'ma devam
+                                        et..</a>
                                 </p>
                                 <p class="social">
                                     <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
@@ -269,11 +256,9 @@
                     <div class="sidebar-box">
                         <h3 class="heading">Categories</h3>
                         <ul class="categories">
-                            <li><a href="#">Food <span>(12)</span></a></li>
-                            <li><a href="#">Travel <span>(22)</span></a></li>
-                            <li><a href="#">Lifestyle <span>(37)</span></a></li>
-                            <li><a href="#">Business <span>(42)</span></a></li>
-                            <li><a href="#">Adventure <span>(14)</span></a></li>
+                            @foreach ($catPost['category'] as $cat => $key)
+                                <li><a href="#">{{ $cat }} <span>({{ $key }})</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- END sidebar-box -->
@@ -281,18 +266,11 @@
                     <div class="sidebar-box">
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Freelancing</a></li>
+                            @foreach ($catPost['tags'] as $tags)
+                                @foreach ($tags as $tag)
+                                    <li><a href="#">{{ $tag }}</a></li>
+                                @endforeach
+                            @endforeach
                         </ul>
                     </div>
                 </div>
