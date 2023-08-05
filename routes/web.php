@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Customer\CommentController;
 use App\Http\Controllers\Customer\HomepageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,8 @@ Route::get('/', function () {
 
 Route::get('/',[HomepageController::class,'index'])->name('homepage');
 Route::get('/widget',[HomepageController::class,'widget'])->name('widget');
-Route::get('/{category}',[HomepageController::class,'categoryDetail'])->name('category.detail');
-Route::get('/{category}/{slug}',[HomepageController::class,'postDetail'])->name('post.detail');
+Route::post('/comment',[CommentController::class,'commentFunc'])->name('comment');
+
 
 Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -51,3 +52,8 @@ Route::middleware('auth', 'isAdmin', 'verified')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+Route::get('/{category}',[HomepageController::class,'categoryDetail'])->name('category.detail');
+Route::get('/{category}/{slug}',[HomepageController::class,'postDetail'])->name('post.detail');

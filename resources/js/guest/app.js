@@ -6,3 +6,4 @@ import '../../../public/customer/js/glightbox.min.js';
 import '../../../public/customer/js/navbar.js';
 import '../../../public/customer/js/counter.js';
 import '../../../public/customer/js/custom.js';
+import '../../../public/customer/js/iziToast.min.js';

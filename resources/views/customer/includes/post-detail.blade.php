@@ -2,7 +2,6 @@
     @section('title', 'Anasayfa')
     @section('css')
     @endsection
-
     <div class="site-cover site-cover-sm same-height overlay single-page"
         style="background-image: url('{{ asset($post->image) }}');">
         <div class="container">
@@ -58,133 +57,7 @@
                             @endforeach
                         </p>
                     </div>
-                    <div class="pt-5 comment-wrap">
-                        <h3 class="mb-5 heading">6 Comments</h3>
-                        <ul class="comment-list">
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="images/person_2.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-
-                                <ul class="children">
-                                    <li class="comment">
-                                        <div class="vcard">
-                                            <img src="images/person_3.jpg" alt="Image placeholder">
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3>Jean Doe</h3>
-                                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                                laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat
-                                                saepe enim sapiente iste iure! Quam voluptas earum impedit
-                                                necessitatibus, nihil?</p>
-                                            <p><a href="#" class="reply rounded">Reply</a></p>
-                                        </div>
-
-
-                                        <ul class="children">
-                                            <li class="comment">
-                                                <div class="vcard">
-                                                    <img src="images/person_4.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3>Jean Doe</h3>
-                                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                        autem, eum officia, fugiat saepe enim sapiente iste iure! Quam
-                                                        voluptas earum impedit necessitatibus, nihil?</p>
-                                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                                </div>
-
-                                                <ul class="children">
-                                                    <li class="comment">
-                                                        <div class="vcard">
-                                                            <img src="images/person_5.jpg" alt="Image placeholder">
-                                                        </div>
-                                                        <div class="comment-body">
-                                                            <h3>Jean Doe</h3>
-                                                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Pariatur quidem laborum necessitatibus, ipsam impedit
-                                                                vitae autem, eum officia, fugiat saepe enim sapiente
-                                                                iste iure! Quam voluptas earum impedit necessitatibus,
-                                                                nihil?</p>
-                                                            <p><a href="#" class="reply rounded">Reply</a></p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                            </li>
-                        </ul>
-                        <!-- END comment-list -->
-
-                        <div class="comment-form-wrap pt-5">
-                            <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
-                                <div class="form-group">
-                                    <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Post Comment" class="btn btn-primary">
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
+                    @include('customer.includes.comment')
                 </div>
                 <!-- END main-content -->
                 <div class="col-md-12 col-lg-4 sidebar">
@@ -218,12 +91,9 @@
                     @include('customer.includes.sidebar-widget')
                 </div>
                 <!-- END sidebar -->
-
             </div>
         </div>
     </section>
-
-
     <!-- Start posts-entry -->
     <section class="section posts-entry posts-entry-sm bg-light">
         <div class="container">
@@ -278,9 +148,40 @@
             </div>
         </div>
     </section>
-    <!-- End posts-entry -->
-
-
     @section('js')
+        <script>
+            $(document).ready(function() {
+                $('#comment').on('submit', function(e) {
+                    e.preventDefault();
+                    var post_id = $('#post_id').val();
+                    var body = $('#body').val();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: "{{ route('comment') }}",
+                        type: "POST",
+                        data: {
+                            post_id: post_id,
+                            body: body,
+                            _token: _token,
+                            type: 'comment-post'
+                        },
+                        success: function(response) {
+                            if (response) {
+                                $('#comment').trigger('reset');
+                                // izitoas
+                                iziToast.success({
+                                    title: 'Başarılı',
+                                    message: 'Yorumunuz başarıyla gönderildi.',
+                                    position: 'topRight'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1000);
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
     @endsection
 </x-guest-layout>

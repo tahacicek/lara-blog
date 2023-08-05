@@ -1,6 +1,10 @@
 <div class="page-sidebar">
-    <a class="logo" href="index.html">Neo</a>
     @if (Auth::check())
+    <a class="logo" href="index.html">Neo</a>
+    @else
+    @endif
+    @if (Auth::check())
+
         <ul class="list-unstyled accordion-menu">
             <li class="active-page">
                 <a href="#" class="active"><i data-feather="activity"></i>Dashboard<i

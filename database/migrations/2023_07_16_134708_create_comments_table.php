@@ -14,17 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
-            $table->string('name');
-            $table->string('email');
-            $table->text('comment');
-            $table->boolean('is_approved')->default(false);
-            $table->string('ip_address')->nullable();
-            $table->string('user_agent')->nullable();
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->string('district')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->text('body');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

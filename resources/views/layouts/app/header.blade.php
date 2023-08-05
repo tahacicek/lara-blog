@@ -2,7 +2,11 @@
     <nav class="navbar navbar-expand-lg d-flex justify-content-between">
         <div class="header-title flex-fill">
             <a href="#" id="sidebar-toggle"><i data-feather="arrow-left"></i></a>
-            <h5>Dashboard</h5>
+            @if (Auth::check())
+                <h5>Dashboard</h5>
+            @else
+                <h5>Home</h5>
+            @endif
         </div>
         @if (Auth::check())
             <div class="header-search">
