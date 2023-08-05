@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\User;
@@ -30,10 +31,10 @@ class HomepageController extends Controller
     public function postDetail($category_name, $slug)
     {
         $post = Post::where('slug', $slug)->with('postCategory')->first();
-        //hit
         $post->hit = $post->hit + 1;
         $post->save();
         $categories = Category::with('postCategory')->get();
+        $comments = Comment::where('post_id', $post->id)->with('user')->get();
         $postTagCat = [];
         //kategorilerin isimlerini alıp postta aynı olanları arraye atıyoruz
         foreach ($categories as $category) {
@@ -70,7 +71,7 @@ class HomepageController extends Controller
         // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
         $catPost['category'] = array_unique($catPost['category']);
 
-        return view('customer.includes.post-detail', compact('post', 'postTagCat', 'user', 'catPost'));
+        return view('customer.includes.post-detail', compact('post', 'postTagCat', 'user', 'catPost', 'comments'));
     }
 
     public function categoryDetail($category_name)

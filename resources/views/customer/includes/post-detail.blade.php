@@ -149,39 +149,6 @@
         </div>
     </section>
     @section('js')
-        <script>
-            $(document).ready(function() {
-                $('#comment').on('submit', function(e) {
-                    e.preventDefault();
-                    var post_id = $('#post_id').val();
-                    var body = $('#body').val();
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url: "{{ route('comment') }}",
-                        type: "POST",
-                        data: {
-                            post_id: post_id,
-                            body: body,
-                            _token: _token,
-                            type: 'comment-post'
-                        },
-                        success: function(response) {
-                            if (response) {
-                                $('#comment').trigger('reset');
-                                // izitoas
-                                iziToast.success({
-                                    title: 'Başarılı',
-                                    message: 'Yorumunuz başarıyla gönderildi.',
-                                    position: 'topRight'
-                                });
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            }
-                        }
-                    });
-                });
-            });
-        </script>
+
     @endsection
 </x-guest-layout>

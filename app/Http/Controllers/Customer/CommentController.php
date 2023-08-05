@@ -26,4 +26,9 @@ class CommentController extends Controller
                 break;
         }
     }
+
+    public function comment(){
+        $comments = Comment::with('user')->get();
+        return view('customer.includes.post-detail', compact('comments'));
+    }
 }
