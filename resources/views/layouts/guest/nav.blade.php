@@ -15,17 +15,17 @@
                             @foreach ($categories as $category)
                                 {{-- ilk dört kategori --}}
                                 @if ($loop->index < 4)
-                                    <li><a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
+                                    <li><a href="{{ route('category.detail', $category->slug) }}">{{ $category->name }}</a>
                                     </li>
                                 @endif
                                 @if ($loop->index == 3)
                                     <li class="has-children">
-                                        <a href="{{ route('category', $category->slug) }}">Diğerleri</a>
+                                        <a href="{{ route('category.detail', $category->slug) }}">Diğerleri</a>
                                         <ul class="dropdown">
                                 @endif
                                 {{-- ilk dört kategori dışındakiler --}}
                                 @if ($loop->index > 3)
-                                    <li><a href="{{ route('category', $category->slug) }}">
+                                    <li><a href="{{ route('category.detail', $category->slug) }}">
                                             {{ $category->name }}</a></li>
                                 @endif
                                 {{-- bu aralıktaki kodu foreacha sokama --}}

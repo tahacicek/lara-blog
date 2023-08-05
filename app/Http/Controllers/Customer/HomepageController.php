@@ -30,6 +30,9 @@ class HomepageController extends Controller
     public function postDetail($category_name, $slug)
     {
         $post = Post::where('slug', $slug)->with('postCategory')->first();
+        //hit
+        $post->hit = $post->hit + 1;
+        $post->save();
         $categories = Category::with('postCategory')->get();
         $postTagCat = [];
         //kategorilerin isimlerini alıp postta aynı olanları arraye atıyoruz
@@ -60,6 +63,7 @@ class HomepageController extends Controller
         foreach ($posts as $post) {
             $categorysPost['tags'][] = explode(',', $post->tags);
         }
+
         $catPost = $categorysPost;
         // aynı kategorilerin sayılarını bulup arraye atıyoruz
         $catPost['category'] = array_count_values($catPost['category']);
@@ -72,7 +76,7 @@ class HomepageController extends Controller
     public function categoryDetail($category_name)
     {
         $category = Category::where('slug', $category_name)->first();
-        $posts = PostCategory::where('category_id', $category->id)->with('post')->paginate(4);
+        $posts = PostCategory::where('category_id', $category->id)->with('post')->paginate(5);
         $categories = Category::with('postCategory')->get();
         $catPost = PostCategory::all();
         $categorysPost = [];
@@ -93,5 +97,32 @@ class HomepageController extends Controller
         // // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
         // $catPost['category'] = array_unique($catPost['category']);
         return view('customer.includes.category-detail', compact('posts', 'category', 'catPost'));
+    }
+
+    public function widget(){
+        // All categories and tags
+        $posts = Post::with('postCategory')->get();
+        $catPost = PostCategory::all();
+        $categories = Category::with('postCategory')->get();
+        $categorysPost = [];
+        //tüm kategorileri ve etiketleri alıyoruz
+        foreach ($categories as $category) {
+            foreach ($posts as $post) {
+                foreach ($post->postCategory as $postCategories) {
+                    if ($category->id == $postCategories->category_id) {
+                        $categorysPost['category'][] = $category->name;
+                    }
+                }
+            }
+        }
+        foreach ($posts as $post) {
+            $categorysPost['tags'][] = explode(',', $post->tags);
+        }
+
+        $catPost = $categorysPost;
+        // aynı kategorilerin sayılarını bulup arraye atıyoruz
+        $catPost['category'] = array_count_values($catPost['category']);
+        // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
+        $catPost['category'] = array_unique($catPost['category']);
     }
 }

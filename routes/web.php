@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 
 Route::get('/',[HomepageController::class,'index'])->name('homepage');
+Route::get('/widget',[HomepageController::class,'widget'])->name('widget');
 Route::get('/{category}',[HomepageController::class,'categoryDetail'])->name('category.detail');
 Route::get('/{category}/{slug}',[HomepageController::class,'postDetail'])->name('post.detail');
 
