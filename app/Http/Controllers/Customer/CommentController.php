@@ -21,6 +21,12 @@ class CommentController extends Controller
                 $comment->save();
                 return response()->json(['success' => 'Yorumunuz basariyla eklendi.'], 200);
                 break;
+            case 'delete-comment':
+                if (!isset($request->type)) return response()->json(['error' => 'Gecersiz istek.'], 400);
+                $comment = Comment::find($request->comment);
+                $comment->delete();
+                return response()->json(['success' => 'Yorumunuz basariyla silindi.'], 200);
+                break;
             default:
                 return response()->json(['error' => 'Gecersiz istek.'], 400);
                 break;

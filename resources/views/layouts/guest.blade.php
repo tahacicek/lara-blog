@@ -14,6 +14,7 @@
     @yield('css')
     <title>@yield('title')</title>
     {{-- izitoas --}}
+    <link rel="stylesheet" href="{{ asset('customer/') }}/css/iziToast.min.css">
     @vite(['resources/css/guest/app.css', 'resources/js/guest/app.js'])
 </head>
 
@@ -42,6 +43,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset('customer/') }}/js/iziToast.min.js"></script>
     @yield('js')
 </body>
 
