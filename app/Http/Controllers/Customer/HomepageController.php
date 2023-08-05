@@ -27,9 +27,9 @@ class HomepageController extends Controller
         return view('customer.index', compact('posts', 'catPost', 'categories'));
     }
 
-    public function postDetail($slug)
+    public function postDetail($category_name, $slug)
     {
-        $post = Post::where('slug', $slug)->with('postCategory')->first() ?? abort(403, "Böyle bir yazı bulunamadı.");
+        $post = Post::where('slug', $slug)->with('postCategory')->first();
         $categories = Category::with('postCategory')->get();
         $postTagCat = [];
         //kategorilerin isimlerini alıp postta aynı olanları arraye atıyoruz
@@ -57,19 +57,41 @@ class HomepageController extends Controller
                 }
             }
         }
-
         foreach ($posts as $post) {
             $categorysPost['tags'][] = explode(',', $post->tags);
         }
         $catPost = $categorysPost;
         // aynı kategorilerin sayılarını bulup arraye atıyoruz
         $catPost['category'] = array_count_values($catPost['category']);
-
         // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
         $catPost['category'] = array_unique($catPost['category']);
-        //
-
 
         return view('customer.includes.post-detail', compact('post', 'postTagCat', 'user', 'catPost'));
+    }
+
+    public function categoryDetail($category_name)
+    {
+        $category = Category::where('slug', $category_name)->first();
+        $posts = PostCategory::where('category_id', $category->id)->with('post')->paginate(4);
+        $categories = Category::with('postCategory')->get();
+        $catPost = PostCategory::all();
+        $categorysPost = [];
+        // //tüm kategorileri ve etiketleri alıyoruz
+        // foreach ($categories as $category) {
+        //     foreach ($posts as $post) {
+        //         if ($category->id == $post->category_id) {
+        //             $categorysPost['category'][] = $category->name;
+        //         }
+        //     }
+        // }
+        // foreach ($posts as $post) {
+        //     $categorysPost['tags'][] = explode(',', $post->tags);
+        // }
+        // $catPost = $categorysPost;
+        // // aynı kategorilerin sayılarını bulup arraye atıyoruz
+        // $catPost['category'] = array_count_values($catPost['category']);
+        // // aynı olan kategorileri ve etiketleri silip sadece bir tane bırakıyoruz
+        // $catPost['category'] = array_unique($catPost['category']);
+        return view('customer.includes.category-detail', compact('posts', 'category', 'catPost'));
     }
 }

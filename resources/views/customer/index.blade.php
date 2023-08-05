@@ -8,8 +8,16 @@
                 <div class="col-md-4">
                     {{-- buraya son iki post dizilecek --}}
                     @foreach ($posts->sortByDesc('created_at')->take(2) as $post)
-                        <a href="" class="h-entry mb-30 v-height gradient"
-                            style="background-image: url('{{ $post->image }}');">
+                        @php
+                            $category_id = $post->postCategory[0]->category_id;
+                            foreach ($categories as $category) {
+                                if ($category->id == $category_id) {
+                                    $category_name = Str::slug($category->name);
+                                }
+                            }
+                        @endphp
+                        <a href="{{ route('post.detail', [$category_name, $post->slug]) }}"
+                            class="h-entry mb-30 v-height gradient" style="background-image: url('{{ $post->image }}');">
 
                             <div class="text">
                                 <span class="date">{{ $post->created_at->format('M d, Y') }}</span>
@@ -21,8 +29,17 @@
                 <div class="col-md-4">
                     {{-- buraya 3. post --}}
                     @foreach ($posts->sortByDesc('created_at')->skip(2)->take(1) as $post)
-                        <a href="{{ route('post.detail', $post->slug) }}" class="h-entry img-5 h-100 gradient"
-                            style="background-image: url('{{ $post->image }}');">
+                        @php
+                            $category_id = $post->postCategory[0]->category_id;
+                            foreach ($categories as $category) {
+                                if ($category->id == $category_id) {
+                                    $category_name = Str::slug($category->name);
+                                }
+                            }
+                        @endphp
+                        <a href="{{ route('post.detail', [$category_name, $post->slug]) }}"
+                            class="h-entry img-5 h-100 gradient" style="background-image: url('{{ $post->image }}');">
+
                             <div class="text">
                                 <div class="post-categories mb-3">
                                     <span class="post-category bg-danger"></span>
@@ -36,7 +53,16 @@
                 <div class="col-md-4">
                     {{-- buraya 4. ve 5. postlar  --}}
                     @foreach ($posts->sortByDesc('created_at')->skip(3)->take(2) as $post)
-                        <a href="{{ route('post.detail', $post->slug) }}" class="h-entry mb-30 v-height gradient"
+                        @php
+                            $category_id = $post->postCategory[0]->category_id;
+                            foreach ($categories as $category) {
+                                if ($category->id == $category_id) {
+                                    $category_name = Str::slug($category->name);
+                                }
+                            }
+                        @endphp
+                        <a href="{{ route('post.detail', [$category_name, $post->slug]) }}"
+                            class="h-entry mb-30 v-height gradient"
                             style="background-image: url('{{ $post->image }}');">
 
                             <div class="text">
@@ -68,12 +94,21 @@
                 </div>
                 <div class="row">
                     @foreach ($value as $post)
+                        @php
+                            $category_id = $post->category_id;
+                            foreach ($categories as $category) {
+                                if ($category->id == $category_id) {
+                                    $category_name = Str::slug($category->name);
+                                }
+                            }
+                        @endphp
                         <div class="col-lg-4 mb-4">
                             <div class="post-entry-alt">
-                                <a href="" class="img-link"><img src="{{ asset($post->post->image) }}"
+                                <a href="{{ route('post.detail', [$category_name, $post->post->slug]) }}" class="img-link"><img src="{{ asset($post->post->image) }}"
                                         alt="Image" class="img-fluid"></a>
                                 <div class="excerpt">
-                                    <h2><a href="{{ route('post.detail', $post->post->slug) }}">{{ $post->post->title }}</a>
+                                    <h2><a
+                                            href="{{ route('post.detail', [$category_name, $post->post->slug]) }}">{{ $post->post->title }}</a>
                                     </h2>
                                     <div class="post-meta align-items-center text-left clearfix">
                                         <figure class="author-figure mb-0 me-3 float-start"><img
