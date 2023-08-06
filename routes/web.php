@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Customer\CommentController;
 use App\Http\Controllers\Customer\HomepageController;
+use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::get('/', function () {
 Route::get('/',[HomepageController::class,'index'])->name('homepage');
 Route::get('/widget',[HomepageController::class,'widget'])->name('widget');
 Route::post('/comment',[CommentController::class,'commentFunc'])->name('comment');
+Route::get('/profile/settings',[CustomerProfileController::class,'index'])->name('profile.index');
 
 
 Route::middleware('auth', 'isAdmin', 'verified')->group(function () {

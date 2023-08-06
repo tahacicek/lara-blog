@@ -11,7 +11,7 @@
                     <div class="meta">
                         {{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
                     </div>
-                    <p>
+                    <p data-comment="{{ $comment->id }}" id="bodyEdit">
                         {{ $comment->body }}
                     </p>
                     <p>
